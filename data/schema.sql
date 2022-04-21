@@ -5,11 +5,11 @@ CREATE DATABASE products;
 
 CREATE TABLE product (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(30) NOT NULL,
-  slogan VARCHAR(120) NOT NULL,
-  description VARCHAR(600) NOT NULL,
-  category VARCHAR(30) NOT NULL,
-  default_price VARCHAR(30) NOT NULL
+  name VARCHAR NOT NULL,
+  slogan VARCHAR NOT NULL,
+  description VARCHAR NOT NULL,
+  category VARCHAR NOT NULL,
+  default_price VARCHAR NOT NULL
 );
 
 -- RELATED --
@@ -25,8 +25,8 @@ CREATE TABLE related (
 CREATE TABLE features (
   id SERIAL PRIMARY KEY,
   product_id INTEGER NOT NULL REFERENCES product(id),
-  feature VARCHAR(30) DEFAULT NULL,
-  value VARCHAR(30) DEFAULT NULL
+  feature VARCHAR DEFAULT NULL,
+  value VARCHAR DEFAULT NULL
 );
 
 -- STYLES --
@@ -34,9 +34,9 @@ CREATE TABLE features (
 CREATE TABLE styles (
   id SERIAL PRIMARY KEY,
   product_id INTEGER NOT NULL REFERENCES product(id),
-  name VARCHAR(30) NOT NULL,
-  sale_price VARCHAR(30) DEFAULT NULL,
-  original_price VARCHAR(30) NOT NULL,
+  name VARCHAR NOT NULL,
+  sale_price VARCHAR DEFAULT NULL,
+  original_price VARCHAR NOT NULL,
   default_style BOOLEAN DEFAULT NULL
 );
 
@@ -45,8 +45,8 @@ CREATE TABLE styles (
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY,
   style_id INTEGER NOT NULL REFERENCES styles(id),
-  thumbnail_url VARCHAR(240) DEFAULT NULL,
-  url VARCHAR(240) DEFAULT NULL
+  thumbnail_url VARCHAR DEFAULT NULL,
+  url VARCHAR DEFAULT NULL
 );
 
 -- SKUS --
@@ -54,6 +54,6 @@ CREATE TABLE photos (
 CREATE TABLE skus (
   id SERIAL PRIMARY KEY,
   style_id INTEGER NOT NULL REFERENCES styles(id),
-  size VARCHAR(30) NOT NULL,
+  size VARCHAR NOT NULL,
   quantity INTEGER DEFAULT NULL
 );
