@@ -1,7 +1,7 @@
 {
   "name": "ice-climbers-products-api",
   "version": "1.0.0",
-  "description": "microservice products API for a retail front-end",
+  "description": "Microservice products API for an e-commerce website",
   "main": "server/index.js",
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
