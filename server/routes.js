@@ -7,13 +7,11 @@ router.get('/products', (req, res) => {
   // returns: JSON array of products, sorted by id, length of based on page/count parameters
   // fields: id, name, slogan, description, category, default_price (all strings, except id number)
 
-  // example call to db model:
-  // db.test()
-  //   .then(({rows}) => {
-  //     res.send(rows);
-  //   })
-  //   .catch(err => console.log(err.stack));
-
+  db.getProducts(req.query.count = 5, req.query.page = 1)
+    .then(({rows}) => {
+      res.send(rows);
+    })
+    .catch(err => console.log(err));
 
 })
 
@@ -22,8 +20,12 @@ router.get('/products/:product_id', (req, res) => {
   // returns: JSON product object, where id matches product_id parameter
   // fields: id, name, slogan, description, category, default price, features (array of feature, value objects) (all strings, except id number)
 
-  console.log(typeof req.params.product_id, req.params.product_id);
-  res.send('message received, loud and clear');
+  db.getProduct(req.params.product_id)
+    .then(({rows}) => {
+      res.send(rows[0]);
+    })
+    .catch(err => console.log(err));
+
 })
 
 router.get('/products/:product_id/styles', (req, res) => {
@@ -36,6 +38,11 @@ router.get('/products/:product_id/styles', (req, res) => {
 
   // consider a view for this query (or all queries)
 
+  db.getStyles(req.params.product_id)
+    .then(({rows}) => {
+      res.send(rows);
+    })
+    .catch(err => console.log(err));
 
 })
 
@@ -43,11 +50,12 @@ router.get('/products/:product_id/related', (req, res) => {
   // parameters: product_id(integer)
   // returns: JSON? array of related_product_id's (integers)
 
+  db.getRelated(req.params.product_id)
+    .then(({rows}) => {
+      res.send(rows[0].related);
+    })
+    .catch(err => console.log(err));
 
 });
-
-
-// TODO:
-// Handle endpoints
 
 module.exports = router;
