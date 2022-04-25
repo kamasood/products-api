@@ -58,4 +58,6 @@ router.get('/products/:product_id/related', (req, res) => {
 
 });
 
+
+
 module.exports = router;
