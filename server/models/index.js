@@ -1,15 +1,8 @@
-require('dotenv').config();
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: process.env.USER,
-  host: process.env.HOST,
-  database: process.env.DB,
-  password: process.env.PASSWORD,
-  port: process.env.PORT
-});
+const pool = require ('../db');
 
 exports.getProducts = (count, page) => {
+  count = count || 5;
+  page = page || 1;
   return pool.query(
     `SELECT *
     FROM product
@@ -82,7 +75,7 @@ exports.getStyles = (id) => {
 exports.getRelated = (id) => {
   return pool.query(
     `SELECT
-      array_to_json(array_agg(r.related_product_id)) related
+      array_agg(r.related_product_id) related
     FROM related r
     WHERE r.current_product_id = $1;`,
     [id]
