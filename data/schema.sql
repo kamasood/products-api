@@ -20,6 +20,8 @@ CREATE TABLE related (
   related_product_id INTEGER DEFAULT NULL
 );
 
+CREATE INDEX related_current_product_id_index ON related(current_product_id);
+
 -- FEATURES --
 
 CREATE TABLE features (
@@ -28,6 +30,8 @@ CREATE TABLE features (
   feature VARCHAR DEFAULT NULL,
   value VARCHAR DEFAULT NULL
 );
+
+CREATE INDEX features_product_id_index ON features(product_id);
 
 -- STYLES --
 
@@ -40,6 +44,8 @@ CREATE TABLE styles (
   default_style BOOLEAN DEFAULT NULL
 );
 
+CREATE INDEX styles_product_id_index ON styles(product_id);
+
 -- PHOTOS --
 
 CREATE TABLE photos (
@@ -49,6 +55,8 @@ CREATE TABLE photos (
   url VARCHAR DEFAULT NULL
 );
 
+CREATE INDEX photos_style_id_index ON photos(style_id);
+
 -- SKUS --
 
 CREATE TABLE skus (
@@ -57,3 +65,5 @@ CREATE TABLE skus (
   size VARCHAR NOT NULL,
   quantity INTEGER DEFAULT NULL
 );
+
+CREATE INDEX skus_style_id_index ON skus(style_id);
