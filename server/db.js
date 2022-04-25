@@ -16,33 +16,29 @@ exports.getProducts = (count, page) => {
     WHERE id BETWEEN $1 AND $2`,
     [((page - 1) * count) + 1, page * count]
   );
-}
+};
 
 exports.getProduct = (id) => {
   return pool.query(
     `SELECT
-      *,
-      (
-        SELECT json_agg(features) features
-        FROM
-          (SELECT feature, value
-          FROM features
-          WHERE product_id = $1) features
-      )
+      p.id,
+      p.name,
+      p.slogan,
+      p.description,
+      p.category,
+      concat(p.default_price, '.00') default_price,
+      json_agg(json_build_object('feature', f.feature, 'value', f.value)) features
     FROM product p
-    WHERE p.id = $1`,
+    JOIN features f
+    ON p.id = f.product_id
+    WHERE p.id = $1
+    GROUP BY p.id;`,
     [id]
   );
+};
 
-  // TODO: cast default_price from "140" to "140.00"
-
-}
-
-// TODO: finish styles query
 exports.getStyles = (id) => {
   return pool.query(
-    // SELECT s.product_id, results: [{styleObjects}]
-
     `SELECT
       s.id "style_id",
       s.name,
@@ -81,16 +77,14 @@ exports.getStyles = (id) => {
     WHERE s.product_id = $1`,
     [id]
   );
-}
+};
 
 exports.getRelated = (id) => {
   return pool.query(
-    `SELECT array_agg(related) related
-    FROM
-      (SELECT related_product_id
-        FROM related
-        WHERE current_product_id = $1) related
-    `,
+    `SELECT
+      array_to_json(array_agg(r.related_product_id)) related
+    FROM related r
+    WHERE r.current_product_id = $1;`,
     [id]
   );
-}
+};

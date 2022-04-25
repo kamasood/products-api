@@ -12,7 +12,6 @@ router.get('/products', (req, res) => {
       res.send(rows);
     })
     .catch(err => console.log(err));
-
 })
 
 router.get('/products/:product_id', (req, res) => {
@@ -25,7 +24,6 @@ router.get('/products/:product_id', (req, res) => {
       res.send(rows[0]);
     })
     .catch(err => console.log(err));
-
 })
 
 router.get('/products/:product_id/styles', (req, res) => {
