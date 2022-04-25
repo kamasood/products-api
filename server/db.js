@@ -43,7 +43,42 @@ exports.getStyles = (id) => {
   return pool.query(
     // SELECT s.product_id, results: [{styleObjects}]
 
-    `SELECT * FROM styles WHERE product_id = $1`,
+    `SELECT
+      s.id "style_id",
+      s.name,
+      s.original_price,
+      s.sale_price,
+      s.default_style "default?",
+      p.photos,
+      sk.skus
+    FROM styles s
+    JOIN (
+      SELECT
+        p.style_id,
+        json_agg(json_build_object('url', p.url, 'thumbnail_url', p.thumbnail_url)) photos
+      FROM photos p
+      WHERE p.style_id IN (
+        SELECT s.id
+        FROM styles s
+        WHERE s.product_id = $1
+      )
+      GROUP BY p.style_id
+    ) p
+    ON s.id = p.style_id
+    JOIN (
+      SELECT
+        sk.style_id,
+        json_object_agg(sk.id, json_build_object('quantity', sk.quantity, 'size', sk.size)) skus
+      FROM skus sk
+      WHERE sk.style_id IN (
+        SELECT s.id
+        FROM styles s
+        WHERE s.product_id = $1
+      )
+      GROUP BY sk.style_id
+    ) sk
+    ON s.id = sk.style_id
+    WHERE s.product_id = $1`,
     [id]
   );
 }

@@ -40,10 +40,12 @@ router.get('/products/:product_id/styles', (req, res) => {
 
   db.getStyles(req.params.product_id)
     .then(({rows}) => {
-      res.send(rows);
+      res.send({
+        product_id: req.params.product_id,
+        results: rows
+      });
     })
     .catch(err => console.log(err));
-
 })
 
 router.get('/products/:product_id/related', (req, res) => {
@@ -55,7 +57,6 @@ router.get('/products/:product_id/related', (req, res) => {
       res.send(rows[0].related);
     })
     .catch(err => console.log(err));
-
 });
 
 
