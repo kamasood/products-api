@@ -5,3 +5,4 @@ package-lock.json
 .eslintrc*
 .DS_Store
 test-queries.sql
+productsAPI.pem
