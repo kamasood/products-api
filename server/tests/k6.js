@@ -1,29 +1,29 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
 
-// export const options = {
-//   vus: 100,
-//   duration: '30s',
-// };
-
-// Spike test example:
-
 export const options = {
-  InsecureSkipTLSVerify: true,
-  noConnectionReuse: false,
-  stages: [
-    { duration: '10s', target: 100 },
-    { duration: '1m', target: 100 },
-    { duration: '10s', target: 1000 },
-    { duration: '3m', target: 1000 },
-    { duration: '10s', target: 100 },
-    { duration: '3m', target: 100 },
-    { duration: '10s', target: 0 },
-  ],
+  vus: 1000,
+  duration: '180s',
 };
 
-// Example from presentation:
+// Other options:
 
+// Spike Test
+// export const options = {
+//   InsecureSkipTLSVerify: true,
+//   noConnectionReuse: false,
+//   stages: [
+//     { duration: '10s', target: 100 },
+//     { duration: '1m', target: 100 },
+//     { duration: '10s', target: 1000 },
+//     { duration: '3m', target: 1000 },
+//     { duration: '10s', target: 100 },
+//     { duration: '3m', target: 100 },
+//     { duration: '10s', target: 0 },
+//   ],
+// };
+
+// Example from presentation
 // export const options = {
 //   scenarios: {
 //     constant_request_rate: {
