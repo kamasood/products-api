@@ -5,7 +5,7 @@ exports.getAllProducts = (req, res) => {
     .then(({rows}) => {
       res.send(rows);
     })
-    .catch(err => console.log(err));
+    .catch(err => res.sendStatus(404));
 };
 
 exports.getOneProduct = (req, res) => {
@@ -13,7 +13,7 @@ exports.getOneProduct = (req, res) => {
     .then(({rows}) => {
       res.send(rows[0]);
     })
-    .catch(err => console.log(err));
+    .catch(err => res.sendStatus(404));
 };
 
 exports.getProductStyles = (req, res) => {
@@ -24,7 +24,7 @@ exports.getProductStyles = (req, res) => {
         results: rows
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => res.sendStatus(404););
 };
 
 exports.getRelatedProducts = (req, res) => {
@@ -32,5 +32,5 @@ exports.getRelatedProducts = (req, res) => {
     .then(({rows}) => {
       res.send(rows[0].related);
     })
-    .catch(err => console.log(err));
+    .catch(err => res.sendStatus(404));
 };
