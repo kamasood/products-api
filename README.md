@@ -180,10 +180,9 @@ Returns all styles available for a specified product ID.
 
 ### GET /products/:product_id/related
 
-Returns the id's of products related to the product specified.
+Returns an array of related product IDs for a specified product. 
 
 #### Parameters
-Endpoint should contain question_id paramenter. Body parameters should be in body in json form.
 
 | **Parameter** | **Type** | **Description**                         |
 |---------------|----------|-----------------------------------------|
