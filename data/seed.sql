@@ -1,6 +1,6 @@
 \copy product(id, name, slogan, description, category, default_price) FROM 'product.csv' WITH CSV HEADER;
 
-\copy related(id, current_product_id, related_product_id)FROM 'related.csv' WITH CSV HEADER;
+\copy related(id, current_product_id, related_product_id) FROM 'related.csv' WITH CSV HEADER;
 
 \copy features(id, product_id, feature, value) FROM 'features.csv' WITH CSV HEADER;
 
