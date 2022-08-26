@@ -4,5 +4,4 @@ package-lock.json
 *.csv
 .eslintrc*
 .DS_Store
-test-queries.sql
-productsAPI.pem
+*.pem

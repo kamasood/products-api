@@ -1,10 +1,9 @@
 const pool = require ('../db');
 
-exports.getProducts = (count, page) => {
-  count = count || 5;
-  page = page || 1;
+exports.getProducts = (count = 5, page = 1) => {
   return pool.query(
-    `SELECT *
+    `SELECT
+      *
     FROM product
     WHERE id BETWEEN $1 AND $2`,
     [((page - 1) * count) + 1, page * count]

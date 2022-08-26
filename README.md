@@ -36,7 +36,7 @@ Retrieves a list of products.
         "id": 1,
         "name": "Camo Onesie",
         "slogan": "Blend in to your crowd",
-        "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+        "description": "The camo onesie will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
         "category": "Jackets",
         "default_price": "140"
     },
@@ -180,7 +180,7 @@ Returns all styles available for a specified product ID.
 
 ### GET /products/:product_id/related
 
-Returns an array of related product IDs for a specified product. 
+Returns an array of related product IDs for a specified product.
 
 #### Parameters
 
