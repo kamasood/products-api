@@ -11,4 +11,8 @@ router.get('/products/:product_id/styles', controllers.getProductStyles);
 
 router.get('/products/:product_id/related', controllers.getRelatedProducts);
 
+router.get('/test', (req, res) => {
+  res.send('test ok');
+});
+
 module.exports = router;
